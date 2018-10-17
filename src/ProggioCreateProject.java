@@ -18,8 +18,8 @@ public class ProggioCreateProject {
         // Finding element by id and sendKey(input) new value
         WebElement emailElement = driver.findElement(By.id("input-email"));
         WebElement passwordElement = driver.findElement(By.id("input-password"));
-        emailElement.sendKeys("vladiasd8@gmail.com");
-        passwordElement.sendKeys("130819933zzxx\n");
+        emailElement.sendKeys("");
+        passwordElement.sendKeys("");
 
         // WebDriverWait required
         // Figured out I need to "wait" between web reloads
