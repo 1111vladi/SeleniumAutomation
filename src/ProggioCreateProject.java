@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static jdk.nashorn.internal.objects.Global.print;
+
 public class ProggioCreateProject {
 
     public static void main(String[] args) {
@@ -26,6 +28,7 @@ public class ProggioCreateProject {
         // "Create Project" and "New Project" by class/cssSelector
         WebElement createProject = driver.findElement(By.cssSelector("input[class='sc-bdVaJa laHbOK]"));
         createProject.click();
+        print(createProject);
 
         driver.quit();
     }
