@@ -3,34 +3,48 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import static jdk.nashorn.internal.objects.Global.print;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProggioCreateProject {
 
     public static void main(String[] args) {
 
+        String proggioLogin = "https://app.proggio.com/login";
+
         // Basic set up to use Chrome browser
         System.setProperty("webdriver.chrome.driver", "E:\\Program Files (x86)\\chromedriver\\chromedriver.exe");
+
         WebDriver driver = new ChromeDriver();
+        WebDriverWait wait = new WebDriverWait(driver, 5);
 
         // Navigate to the specified url
-        driver.get("https://app.proggio.com/login");
+        driver.get(proggioLogin);
 
-        // Finding element by id and sendKey(input) new value
+        // Complete Login
         WebElement emailElement = driver.findElement(By.id("input-email"));
         WebElement passwordElement = driver.findElement(By.id("input-password"));
         emailElement.sendKeys("");
         passwordElement.sendKeys("");
+        WebElement signIn = driver.findElement(By.id("button-login"));
+        signIn.click();
 
-        // WebDriverWait required
-        // Figured out I need to "wait" between web reloads
-        // "Create Project" and "New Project" by class/cssSelector
-        WebElement createProject = driver.findElement(By.cssSelector("input[class='sc-bdVaJa laHbOK]"));
-        createProject.click();
-        print(createProject);
+        // TODO - Check how to efficiently wait between actions
+        // TODO - Fix the action collision below
+        // use xpath at a last resort
+        // Open new Project
+        WebElement newProg = (wait).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"My Projects\"]/div[3]/div[1]/div[2]/div")));
+        newProg.click();
 
-        driver.quit();
+        // Click on the avatar icon and sign out
+        WebElement avatarClick = (wait).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"button-user-profile\"]/div/div")));
+        avatarClick.click();
+        WebElement signOut = driver.findElement(By.id("link-profile-sign-out"));
+        signOut.click();
+
+
+
+        //driver.quit();
     }
 
 }
